@@ -2744,7 +2744,7 @@ function showSection(id, clickedBtn, isMobile) {
       const label = navText.trim();
       if (label) document.title = label + ' · ' + baseTitle;
     } catch (e) {}
-    localStorage.setItem('ahcActiveSection', id);
+    localStorage.setItem('nocccdActiveSection', id);
   } catch (e) { /* no-op */ }
 }
 
@@ -2753,7 +2753,7 @@ function resolveInitialSection() {
   try {
     const hash = (window.location.hash || '').replace(/^#/, '').trim();
     if (hash && document.getElementById('section-' + hash)) return hash;
-    const stored = localStorage.getItem('ahcActiveSection');
+    const stored = localStorage.getItem('nocccdActiveSection');
     if (stored && document.getElementById('section-' + stored)) return stored;
   } catch (e) { /* no-op */ }
   return 'overview';
@@ -3627,7 +3627,7 @@ function resetBudgetModForm() {
 }
 
 /* ════════════ GRANT MODIFICATION REQUEST FORM (Forms tab) ════════════ */
-const GMR_STORE = 'grant_mod_form_v1';
+const GMR_STORE = 'nocccd_grant_mod_form_v1';
 function gmrLoad() { try { return JSON.parse(localStorage.getItem(GMR_STORE)) || {}; } catch (e) { return {}; } }
 function gmrSave(s) { try { localStorage.setItem(GMR_STORE, JSON.stringify(s)); } catch (e) {} }
 function gmrEsc(v) { return v == null ? '' : String(v).replace(/"/g, '&quot;'); }
@@ -4478,12 +4478,12 @@ const PACE_LABEL = { slow:'Slow', moderate:'Moderate', fast:'Fast' };
 
 // Current year filter for the Underspend Risk Alerts ('all' | 'y1' | 'y2')
 let currentYearFilter = (function(){
-  try { return localStorage.getItem('ahcYearFilter') || 'all'; } catch(e){ return 'all'; }
+  try { return localStorage.getItem('nocccdYearFilter') || 'all'; } catch(e){ return 'all'; }
 })();
 function setYearFilter(filter, btn) {
   if (filter !== 'all' && filter !== 'y1' && filter !== 'y2') filter = 'all';
   currentYearFilter = filter;
-  try { localStorage.setItem('ahcYearFilter', filter); } catch(e){}
+  try { localStorage.setItem('nocccdYearFilter', filter); } catch(e){}
   document.body.setAttribute('data-year-filter', filter);
   document.querySelectorAll('.year-filter-tab').forEach(t => {
     const isActive = t.dataset.yearFilter === filter;
